@@ -1,0 +1,47 @@
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
+import Logo from '../assets/logo/logo.png'
+
+import { motion, useAnimation } from "framer-motion";
+import { RxHamburgerMenu } from "react-icons/rx";
+import Menu from '../assets/menu.svg'
+import close from "../assets/close.svg"
+
+const Navbar = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <motion.nav
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.5 }}
+      className="absolute z-10 w-full bg-transparent p-4 flex justify-between items-center"
+    >
+      <div className="flex items-center mt-[-5px]">
+        {/* Logo */}
+        <img src={Logo} alt="Logo" className="md:w-[130px] md:h-[80px] w-[100px] h-[70px] mr-4" />
+      </div>
+      <div className="hidden sm:block flex items-center lg:mx-24 md:mx-4 mt-[-10px]">
+        <button onClick={() => scrollToSection('home')} className="text-white lg:mr-10 md:mr-7 font-IBM">หน้าแรก</button>
+        <button onClick={() => scrollToSection('about-us')} className="text-white lg:mr-10 md:mr-7 font-IBM">เกี่ยวกับเรา</button>
+        <button onClick={() => scrollToSection('services')} className="text-white lg:mr-10 md:mr-7 font-IBM">บริการของเรา</button>
+        <button onClick={() => scrollToSection('blog')} className="text-white lg:mr-10 md:mr-7 font-IBM">บทความ</button>
+        <button onClick={() => scrollToSection('contact')} className="text-white lg:mr-10 md:mr-7 font-IBM">ติดต่อเรา</button>
+        <div className="w-[2px] h-[25px] bg-white lg:mr-10 md:mr-7" />
+        <button className="text-white">EN</button>
+      </div>
+      <div>
+        <RxHamburgerMenu className='text-white text-[35px] mx-2 mt-[-10px] ' />
+      </div>
+    </motion.nav>
+  );
+};
+
+export default Navbar

@@ -1,21 +1,23 @@
 import { useState } from "react"
-import Logo from '../assets/logo/logo.png'
-import { Link } from 'react-scroll';
-
+import Logo from '../assets/logo/logo.webp'
 
 import { motion } from "framer-motion";
 import menu from '../assets/menu.svg'
 import close from "../assets/close.svg"
+import { useTranslation } from 'react-i18next';
+
 
 const Navbar = () => {
+  
+  const { t } = useTranslation();
   const [toggle, setToggle] = useState(false);
+  const currentPath = window.location.pathname;
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleLanguage = () => {
+    const lang = currentPath === '/en' ? 'TH' : 'EN';
+    window.location.href = '/' + lang.toLowerCase();
   };
+  
 
   return (
     <motion.nav
@@ -25,21 +27,31 @@ const Navbar = () => {
       className="absolute z-10 w-full bg-transparent p-4 flex justify-between items-center"
     >
       <div className="flex items-center mt-[5px]">
-        {/* Logo */}
-        <img src={Logo} alt="Logo" className="md:w-[130px] md:h-[80px] w-[100px] h-[70px] mr-4" />
+        <img src={Logo} alt="Logo" className="md:w-[130px] md:h-[80px] w-[100px] h-[70px] mr-4"  />
       </div>
-      <div className="hidden sm:block">
+
+      <div className="hidden md:block">
         <div className=" flex items-center lg:mx-24 md:mx-4 mt-[-10px]">
-          <button onClick={() => scrollToSection('home')} className="text-white lg:mr-10 md:mr-7 font-IBM">หน้าแรก</button>
-          <button onClick={() => scrollToSection('about-us')} className="text-white lg:mr-10 md:mr-7 font-IBM">เกี่ยวกับเรา</button>
-          <button onClick={() => scrollToSection('services')} className="text-white lg:mr-10 md:mr-7 font-IBM">บริการของเรา</button>
-          <button onClick={() => scrollToSection('blog')} className="text-white lg:mr-10 md:mr-7 font-IBM">บทความ</button>
-          <button onClick={() => scrollToSection('contact')} className="text-white lg:mr-10 md:mr-7 font-IBM">ติดต่อเรา</button>
+          <a href="/" className="text-white lg:mr-10 md:mr-7 font-IBM hover:text-gray-200">
+            {t('หน้าแรก')}
+          </a>
+          <a href="#about-us" className="text-white lg:mr-10 md:mr-7 font-IBM hover:text-gray-200">
+            {t('เกี่ยวกับเรา')}
+          </a>
+          <a href="#services" className="text-white lg:mr-10 md:mr-7 font-IBM hover:text-gray-200">
+            {t('บริการของเรา')}
+          </a>
+          <a href="#blog" className="text-white lg:mr-10 md:mr-7 font-IBM hover:text-gray-200">
+            {t('บทความ')}
+            </a>
+          <a href="#contact" className="text-white lg:mr-10 md:mr-7 font-IBM hover:text-gray-200">
+            {t('ติดต่อเรา')}
+          </a>
           <div className="w-[2px] h-[25px] bg-white lg:mr-7 md:mr-7" />
-          <button className="text-white">EN</button>
-
+          <button className="text-white font-IBM" onClick={() => handleLanguage('EN')}>
+              {currentPath === '/en' ? 'TH' : 'EN'}
+          </button>
         </div>
-
       </div>
 
       <div className="md:hidden">
@@ -50,44 +62,20 @@ const Navbar = () => {
           onClick={() => setToggle(!toggle)}
         />
 
-        <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-[#120c5eda]
+        <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-[#1c2777da]
             absolute top-20 right-0 md:mx-8 mx-8 min-w-[140px] z-10 rounded-xl`}
         >
           <ul className="list-non flex justify-end items-start flex-col gap-4">
-            <li
-              className="grid grid-cols-1 gap-3"
-            >
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  หน้าแรก
-                </a>
-              </div>
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  เกี่ยวกับเรา
-                </a>
-              </div>
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  บริการของเรา
-                </a>
-              </div>
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  บทความ
-                </a>
-              </div>
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  ติดต่อเรา
-                </a>
-              </div>
-              <div>
-                <a href='/' className="text-white font-IBM">
-                  EN
-                </a>
-              </div>
+          <li className="grid grid-cols-1 gap-3">
+              <a href="/" className="text-white font-IBM">{t('หน้าแรก')}</a>
+              <a href="#about-us" className="text-white font-IBM">{t('เกี่ยวกับเรา')}</a>
+              <a href="#services" className="text-white font-IBM">{t('บริการของเรา')}</a>
+              <a href="#blog" className="text-white font-IBM">{t('บทความ')}</a>
+              <a href="#contact" className="text-white font-IBM">{t('ติดต่อเรา')}</a>
             </li>
+              <button className="text-white font-IBM" onClick={() => handleLanguage('EN')}>
+              {currentPath === '/en' ? 'TH' : 'EN'}
+              </button>
           </ul>
 
         </div>

@@ -1,23 +1,22 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import Layout from './pages/layout'
 import Home from './pages/Home'
 
+const Layout = lazy(() => import('./pages/layout'))
+
 function App() {
+  
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Suspense fallback={<div className='bg-gray-100 w-full h-screen'/>}>
         <Routes>
-        <Route  element={<Layout />}>
-        <Route path="/" element={<Home />} />
-
-
-          
-        </Route>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/:lang" element={<Home />} />
+          </Route>
         </Routes>
-      </BrowserRouter>
-    </div>
+      </Suspense>
+    </BrowserRouter>
   )
 }
 

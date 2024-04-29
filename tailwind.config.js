@@ -5,20 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        Kanit: ['Kanit', 'sans-serif'],
-        Mitr: ['Mitr', 'sans-serif'],
-        Noto: ['Noto Sans Thai', 'sans-serif'],
-        CH: ['Chonburi', 'sans-serif'],
-        Chonburi: ['Chonburi', 'sans-serif'],
-        Montserrat: ['Montserrat', 'sans-serif'],
-        IBM: ['IBM Plex Sans Thai', 'sans-serif'],
-        Kanit2: ['Kanit', 'sans-serif'],
-        Athiti: ['Athiti', 'sans-serif'],
-        
-        
+      screens: {
+        '2xl': '1600px',
+        '3xl': '1800px',
       },
-
+      fontFamily: {
+        Mitr: ['Mitr', 'sans-serif'],
+        IBM: ['IBM Plex Sans Thai', 'sans-serif'],
+        Athiti: ['Athiti', 'sans-serif'],
+      
+      },
     },
   },
   plugins: [],
